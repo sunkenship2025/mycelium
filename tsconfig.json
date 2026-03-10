@@ -1,0 +1,41 @@
+{
+  "extends": "./tsconfig.build.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "strict": true,
+    "noImplicitAny": true,
+    "paths": {
+      //"@myceliumhq/*": ["packages/*/src"],
+      "@myceliumhq/api-server": [
+        "packages/api-server/src"
+      ],
+      "@myceliumhq/common-all": [
+        "packages/common-all/src"
+      ],
+      "@myceliumhq/unified": [
+        "packages/unified/src"
+      ],
+      "@myceliumhq/common-server": [
+        "packages/common-server/src"
+      ],
+      "@myceliumhq/common-test-utils": [
+        "packages/common-test-utils/src"
+      ],
+      "@myceliumhq/engine-test-utils": [
+        "packages/engine-test-utils/src"
+      ],
+      "@myceliumhq/mycelium-cli": [
+        "packages/mycelium-cli/src"
+      ],
+      "@myceliumhq/engine-server": [
+        "packages/engine-server/src"
+      ],
+      "@myceliumhq/plugin-core": [
+        "packages/plugin-core/src"
+      ],
+      "@myceliumhq/pods-core": [
+        "packages/pods-core/src"
+      ]
+    }
+  }
+}
