@@ -1,0 +1,59 @@
+{
+  "name": "@myceliumhq/common-test-utils",
+  "private": true,
+  "version": "0.124.0",
+  "description": "",
+  "license": "Apache 2.0",
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com/myceliumhq/mycelium.git",
+    "directory": "packages/common-test-utils"
+  },
+  "author": {
+    "name": "Kevin Lin",
+    "email": "kevin@thence.io",
+    "url": "https://kevinslin.com"
+  },
+  "keywords": [],
+  "files": [
+    "lib"
+  ],
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "scripts": {
+    "clean": "rimraf lib && rimraf coverage",
+    "format": "echo nop",
+    "lint": "echo stub",
+    "prepublishOnly": "yarn build",
+    "prebuild": "yarn clean && yarn format && yarn lint && echo Using TypeScript && tsc --version",
+    "build": "yarn compile",
+    "buildCI": "yarn compile",
+    "compile": "tsc -p tsconfig.json ",
+    "coverage": "echo 0 ",
+    "watch": "yarn compile --watch"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^9.0.1",
+    "@types/lodash": "^4.14.161",
+    "@types/node": "13.11.0",
+    "rimraf": "^2.6.2",
+    "ts-node": "^8.10.2"
+  },
+  "engines": {
+    "node": ">=12.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@myceliumhq/common-all": "^0.124.0",
+    "@myceliumhq/common-server": "^0.124.0",
+    "@myceliumhq/pods-core": "^0.124.0",
+    "@types/sinon": "^9.0.9",
+    "fs-extra": "^9.0.1",
+    "jest": "^28.1.0",
+    "lodash": "^4.17.20",
+    "sinon": "^9.2.1"
+  },
+  "gitHead": "d2e0e1c5ada1ac4a507e2da387cf761316de76de"
+}
