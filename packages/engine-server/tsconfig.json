@@ -1,0 +1,8 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    // "paths": {
+    //   "@myceliumhq/common-server": ["node_modules/@myceliumhq/common-server"]
+    // }
+  }
+}
