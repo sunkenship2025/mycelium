@@ -1,0 +1,53 @@
+import _ from "lodash";
+import ora from "ora";
+import { MYCELIUM_EMOJIS } from "@myceliumhq/common-all";
+
+export class CLIUtils {
+  /**
+   * Takes an object like
+   *     {
+   *     		foo: "42",
+   *     		bar: 10
+   *     }
+   * and returns "foo=42,bar=10"
+   * @param ent: config object
+   * @returns
+   */
+  static objectConfig2StringConfig = (ent: any): string => {
+    return (
+      _.map(ent, (v, k) => {
+        if (_.isUndefined(v)) {
+          return undefined;
+        } else {
+          return `${k}=${v}`;
+        }
+      }).filter((ent) => !_.isUndefined(ent)) as string[]
+    ).join(",");
+  };
+
+  static getClientVersion() {
+    // eslint-disable-next-line global-require
+    const pkgJSON = require("@myceliumhq/mycelium-cli/package.json");
+    return pkgJSON.version;
+  }
+}
+
+export class SpinnerUtils {
+  /**
+   * Given a Ora spinner, render given text with optional symbol
+   * Continue spinning.
+   * @param opts
+   */
+  static renderAndContinue(opts: {
+    spinner: ora.Ora;
+    text?: string;
+    symbol?: string;
+  }) {
+    const { spinner, text, symbol } = opts;
+    spinner.stopAndPersist({
+      text: text || undefined,
+      symbol: symbol || MYCELIUM_EMOJIS.SEEDLING,
+    });
+    spinner.start();
+  }
+}

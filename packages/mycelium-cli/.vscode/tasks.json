@@ -1,0 +1,89 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "chmod +x",
+      "command": "chmod +x lib/bin/mycelium-cli.js",
+      "type": "shell",
+      "problemMatcher": []
+    },
+    {
+      "label": "watch-vault-dev",
+      "type": "shell",
+      "command": "nodemon --watch '/Users/kevinlin/projects/myceliumv2/mycelium-template/vault' --watch '${workspaceFolder}/**/*'  --ext md,ts lib/bin/mycelium-cli.js build-site --vault /Users/kevinlin/projects/myceliumv2/mycelium-template/vault --myceliumRoot /Users/kevinlin/projects/myceliumv2/mycelium-template",
+      "problemMatcher": []
+    },
+    {
+      "label": "build-site",
+      "type": "shell",
+      "command": "node --inspect lib/bin/mycelium-cli.js buildSiteV2 --wsRoot /Users/kevinlin/Dropbox/Apps/Noah --stage dev --enginePort `cat /Users/kevinlin/Dropbox/Apps/Noah/.mycelium.port`",
+      "options": {},
+      "problemMatcher": []
+    },
+    {
+      "label": "export-pod",
+      "type": "shell",
+      "command": "node --inspect ${workspaceFolder}/lib/bin/mycelium-cli exportPod --wsRoot ${workspaceFolder}/../../test-workspace --podId mycelium.airtable --podPkg @myceliumhq/airtable-pod --showConfig",
+      "problemMatcher": []
+    },
+    {
+      "label": "gdoc-import-pod",
+      "type": "shell",
+      "command": "node --inspect ${workspaceFolder}/lib/bin/mycelium-cli importPod --wsRoot ${workspaceFolder}/../../test-workspace --podId mycelium.gdoc --podSource builtin",
+      "problemMatcher": []
+    },
+    {
+      "label": "orbit-import-pod",
+      "type": "shell",
+      "command": "node --inspect ${workspaceFolder}/lib/bin/mycelium-cli importPod --wsRoot ${workspaceFolder}/../../test-workspace --podId mycelium.orbit --podSource builtin",
+      "problemMatcher": []
+    },
+    {
+      "label": "publish-pod",
+      "type": "shell",
+      "command": "node --inspect ${workspaceFolder}/lib/bin/mycelium-cli publishPod --wsRoot ${workspaceFolder}/../../test-workspace --podId mycelium.markdown --vault vault --query root --podSource builtin",
+      "problemMatcher": []
+    },
+    {
+      "label": "markdown-export-v2",
+      "type": "shell",
+      "command": "node --inspect ${workspaceFolder}/lib/bin/mycelium-cli exportPodV2  --vault vault --fname mycelium.alternatives --podId test-md --wsRoot ${workspaceFolder}/../../test-workspace",
+      "problemMatcher": []
+    },
+    {
+      "label": "json-export-v2",
+      "type": "shell",
+      "command": "node --inspect ${workspaceFolder}/lib/bin/mycelium-cli exportPodV2 --podConfig ${workspaceFolder}/../../test-workspace/pods/custom/config.json-exp.yml --vault vault --wsRoot ${workspaceFolder}/../../test-workspace",
+      "problemMatcher": []
+    },
+    {
+      "label": "airtable-export-v2",
+      "type": "shell",
+      "command": "node --inspect ${workspaceFolder}/lib/bin/mycelium-cli exportPodV2 --podId novels-airtable --inlineConfig Key=exportScope,Value=Note --vault vault --fname mycelium.alternatives --wsRoot ${workspaceFolder}/../../test-workspace",
+      "problemMatcher": []
+    },
+    {
+      "label": "notion-export-v2",
+      "type": "shell",
+      "command": "node --inspect ${workspaceFolder}/lib/bin/mycelium-cli exportPodV2 --podId notion-export --inlineConfig Key=exportScope,Value=Note --vault vault --fname mycelium.alternatives --wsRoot ${workspaceFolder}/../../test-workspace",
+      "problemMatcher": []
+    },
+    {
+      "label": "gdoc-export-v2",
+      "type": "shell",
+      "command": "node --inspect ${workspaceFolder}/lib/bin/mycelium-cli exportPodV2 --inlineConfig Key=exportScope,Value=Note --vault vault --fname mycelium.alternatives --podId testing-gdoc --wsRoot ${workspaceFolder}/../../test-workspace ",
+      "problemMatcher": []
+    },
+    {
+      "label": "publish --help",
+      "type": "shell",
+      "command": "node --inspect ${workspaceFolder}/lib/bin/mycelium-cli publish --help --wsRoot ${workspaceFolder}/../../test-workspace "
+    },
+    {
+      "label": "visualize",
+      "type": "shell",
+      "command": "node --inspect ${workspaceFolder}/lib/bin/mycelium-cli visualize --wsRoot ${workspaceFolder}/../../test-workspace",
+      "problemMatcher": []
+    }
+  ]
+}
