@@ -1,0 +1,54 @@
+{
+  "name": "@myceliumhq/mycelium-viz",
+  "version": "0.124.0",
+  "description": "mycelium-viz",
+  "license": "Apache 2.0",
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com/myceliumhq/mycelium.git",
+    "directory": "packages/mycelium-viz"
+  },
+  "author": {
+    "name": "Mycelium INC",
+    "email": "eng@mycelium.so",
+    "url": "https://www.mycelium.so"
+  },
+  "keywords": [
+    "common"
+  ],
+  "files": [
+    "lib"
+  ],
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "scripts": {
+    "clean": "rimraf lib && rimraf coverage",
+    "prepublishOnly": "yarn build",
+    "prebuild": "yarn clean",
+    "build": "yarn copyNonTSFiles && yarn compile",
+    "buildCI": "yarn copyNonTSFiles && yarn compile",
+    "copyNonTSFiles": "node ./ensureDir && node copy",
+    "compile": "tsc -p tsconfig.build.json",
+    "watch": "yarn copyNonTSFiles && yarn compile --watch"
+  },
+  "dependencies": {
+    "@myceliumhq/common-all": "^0.124.0",
+    "@myceliumhq/engine-server": "^0.124.0",
+    "d3": "^7.6.1",
+    "lodash": "^4.17.21",
+    "micromatch": "^4.0.4",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "yargs": "^17.4.1"
+  },
+  "devDependencies": {
+    "@types/micromatch": "^4.0.2",
+    "rimraf": "^2.6.2"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

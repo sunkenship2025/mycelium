@@ -1,0 +1,26 @@
+{
+  "name": "mycelium-design-system",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/mycelium-design-system/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "pnpm --filter mycelium-design-system build"
+      }
+    },
+    "lint": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "pnpm --filter mycelium-design-system lint"
+      }
+    },
+    "test": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "pnpm --filter mycelium-design-system test"
+      }
+    }
+  }
+}

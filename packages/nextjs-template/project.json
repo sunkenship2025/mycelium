@@ -1,0 +1,26 @@
+{
+  "name": "nextjs-template",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/nextjs-template/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "pnpm --filter @myceliumhq/nextjs-template build"
+      }
+    },
+    "lint": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "pnpm --filter @myceliumhq/nextjs-template lint"
+      }
+    },
+    "test": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "pnpm --filter @myceliumhq/nextjs-template test"
+      }
+    }
+  }
+}
