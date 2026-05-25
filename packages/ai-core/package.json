@@ -1,0 +1,14 @@
+{
+  "name": "@myceliumhq/ai-core",
+  "version": "1.0.0",
+  "description": "AI core package for embeddings and vector search",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc -b"
+  },
+  "dependencies": {
+    "hnswlib-node": "^2.0.0",
+    "voy": "^0.1.0"
+  }
+}
