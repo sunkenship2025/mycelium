@@ -1,0 +1,1603 @@
+{
+  "name": "@myceliumhq/plugin-core",
+  "private": true,
+  "displayName": "mycelium",
+  "description": "Mycelium is a hierarchical note taking tool that grows as you do.",
+  "publisher": "mycelium",
+  "version": "0.124.0",
+  "sponsor": {
+    "url": "https://accounts.mycelium.so/account/subscribe"
+  },
+  "engines": {
+    "vscode": "^1.77.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "installConfig": {
+    "hoistingLimits": "none"
+  },
+  "keywords": [
+    "second brain",
+    "markdown",
+    "roam",
+    "notes",
+    "schema"
+  ],
+  "activationEvents": [
+    "*"
+  ],
+  "main": "./out/src/extension.js",
+  "browser": "./dist/web/extension.js",
+  "extensionPack": [
+    "mycelium.mycelium-paste-image"
+  ],
+  "contributes": {
+    "languages": [
+      {
+        "id": "markdown",
+        "extensions": [
+          ".md"
+        ],
+        "aliases": [
+          "markdown"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "viewsWelcome": [
+      {
+        "view": "mycelium.backlinks",
+        "contents": "There are no backlinks to this note."
+      },
+      {
+        "view": "mycelium.recent-workspaces",
+        "contents": "No recent workspaces detected. If this is your first time using Mycelium, [try out our tutorial workspace](command:mycelium.launchTutorialWorkspace?%7B%22invocationPoint%22%3A%22RecentWorkspacesPanel%22%7D)."
+      },
+      {
+        "view": "mycelium.treeView",
+        "contents": "First open a Mycelium note to see the tree view."
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "mycelium-view",
+          "title": "Mycelium",
+          "icon": "media/icons/mycelium-activity-bar-icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "explorer": [
+        {
+          "id": "mycelium.sample",
+          "name": "Sample View",
+          "type": "webview",
+          "when": "mycelium:devMode"
+        }
+      ],
+      "mycelium-view": [
+        {
+          "id": "mycelium.tip-of-the-day",
+          "name": "Tip of the Day",
+          "when": "mycelium:pluginActive && shellExecutionSupported",
+          "type": "webview"
+        },
+        {
+          "id": "mycelium.backlinks",
+          "name": "Backlinks",
+          "when": "mycelium:pluginActive && shellExecutionSupported"
+        },
+        {
+          "id": "mycelium.treeView",
+          "name": "Tree View",
+          "when": "mycelium:pluginActive",
+          "icon": "media/icons/mycelium-vscode.svg"
+        },
+        {
+          "id": "mycelium.lookup-view",
+          "name": "Lookup View",
+          "type": "webview",
+          "when": "mycelium:pluginActive && mycelium:noteLookupActive && mycelium:shouldShowLookupView"
+        },
+        {
+          "id": "mycelium.calendar-view",
+          "name": "Calendar View",
+          "type": "webview",
+          "when": "mycelium:pluginActive && shellExecutionSupported"
+        },
+        {
+          "id": "mycelium.recent-workspaces",
+          "name": "Recent Mycelium Workspaces",
+          "when": "!mycelium:pluginActive && shellExecutionSupported"
+        },
+        {
+          "id": "mycelium.help-and-feedback",
+          "name": "Help and Feedback",
+          "when": "shellExecutionSupported"
+        },
+        {
+          "id": "mycelium.graph-panel",
+          "name": "Graph Panel",
+          "type": "webview",
+          "when": "mycelium:pluginActive && shellExecutionSupported"
+        }
+      ]
+    },
+    "categories": [
+      "Other"
+    ],
+    "commands": [
+      {
+        "command": "mycelium.backlinks.sortByLastUpdated",
+        "title": "Sort by Last Updated"
+      },
+      {
+        "command": "mycelium.backlinks.sortByLastUpdatedChecked",
+        "title": "✓ Sort by Last Updated"
+      },
+      {
+        "command": "mycelium.backlinks.sortByPathNames",
+        "title": "Sort by Path Names"
+      },
+      {
+        "command": "mycelium.backlinks.sortByPathNamesChecked",
+        "title": "✓ Sort by Path Names"
+      },
+      {
+        "command": "mycelium.backlinks.expandAll",
+        "title": "Expand All",
+        "icon": "$(expand-all)"
+      },
+      {
+        "command": "mycelium.treeView.labelByTitle",
+        "title": "Label and sort notes by title",
+        "icon": "$(list-ordered)"
+      },
+      {
+        "command": "mycelium.treeView.labelByFilename",
+        "title": "Label and sort notes by filename",
+        "icon": "$(list-ordered)"
+      },
+      {
+        "command": "mycelium.treeView.expandAll",
+        "title": "Expand All",
+        "icon": "$(expand-all)"
+      },
+      {
+        "command": "mycelium.treeView.createNote",
+        "title": "Create Note",
+        "icon": "$(new-file)"
+      },
+      {
+        "command": "mycelium.treeView.expandStub",
+        "title": "Mycelium: Dev: Expand Stub"
+      },
+      {
+        "command": "mycelium.treeView.gotoNote",
+        "title": "Create Note",
+        "icon": "$(gist-new)"
+      },
+      {
+        "command": "mycelium.graph-panel.increaseDepth",
+        "title": "Increase Depth",
+        "icon": "$(arrow-up)"
+      },
+      {
+        "command": "mycelium.graph-panel.decreaseDepth",
+        "title": "Decrease Depth",
+        "icon": "$(arrow-down)"
+      },
+      {
+        "command": "mycelium.graph-panel.showBacklinks",
+        "title": "Show Backlinks"
+      },
+      {
+        "command": "mycelium.graph-panel.showOutwardLinks",
+        "title": "Show Outward Links"
+      },
+      {
+        "command": "mycelium.graph-panel.showHierarchy",
+        "title": "Show Hierarchy"
+      },
+      {
+        "command": "mycelium.graph-panel.showBacklinksChecked",
+        "title": "✓ Show Backlinks"
+      },
+      {
+        "command": "mycelium.graph-panel.showOutwardLinksChecked",
+        "title": "✓ Show Outward Links"
+      },
+      {
+        "command": "mycelium.graph-panel.showHierarchyChecked",
+        "title": "✓ Show Hierarchy"
+      },
+      {
+        "command": "mycelium.browseNote",
+        "title": "Mycelium: Browse Note"
+      },
+      {
+        "command": "mycelium.contributeToCause",
+        "title": "Mycelium: Contribute "
+      },
+      {
+        "command": "mycelium.goto",
+        "title": "Mycelium: Go to"
+      },
+      {
+        "command": "mycelium.gotoNote",
+        "title": "Mycelium: Go to Note"
+      },
+      {
+        "command": "mycelium.createSchemaFromHierarchy",
+        "title": "Mycelium: Create Schema From Note Hierarchy"
+      },
+      {
+        "command": "mycelium.createDailyJournalNote",
+        "title": "Mycelium: Create Daily Journal Note"
+      },
+      {
+        "command": "mycelium.copyNoteLink",
+        "title": "Mycelium: Copy Note Link"
+      },
+      {
+        "command": "mycelium.copyNoteRef",
+        "title": "Mycelium: Copy Note Ref"
+      },
+      {
+        "command": "mycelium.copyToClipboard",
+        "title": "Mycelium: Copy To Clipboard"
+      },
+      {
+        "command": "mycelium.copyCodespaceURL",
+        "title": "Mycelium: Copy Codespace URL"
+      },
+      {
+        "command": "mycelium.copyAs",
+        "title": "Mycelium: Copy As"
+      },
+      {
+        "command": "mycelium.delete",
+        "title": "Mycelium: Delete"
+      },
+      {
+        "command": "mycelium.insertNoteLink",
+        "title": "Mycelium: Insert Note Link"
+      },
+      {
+        "command": "mycelium.insertNoteIndex",
+        "title": "Mycelium: Insert Note Index"
+      },
+      {
+        "command": "mycelium.moveNote",
+        "title": "Mycelium: Move Note"
+      },
+      {
+        "command": "mycelium.moveSelectionTo",
+        "title": "Mycelium: Move Selection To"
+      },
+      {
+        "command": "mycelium.mergeNote",
+        "title": "Mycelium: Merge Note"
+      },
+      {
+        "command": "mycelium.randomNote",
+        "title": "Mycelium: Random Note"
+      },
+      {
+        "command": "mycelium.renameNoteV2a",
+        "title": "Mycelium: Rename Note V2a"
+      },
+      {
+        "command": "mycelium.renameNote",
+        "title": "Mycelium: Rename Note"
+      },
+      {
+        "command": "mycelium.renameHeader",
+        "title": "Mycelium: Rename Header"
+      },
+      {
+        "command": "mycelium.moveHeader",
+        "title": "Mycelium: Move Header"
+      },
+      {
+        "command": "mycelium.convertCandidateLink",
+        "title": "Mycelium: Convert Candidate Link"
+      },
+      {
+        "command": "mycelium.convertLink",
+        "title": "Mycelium: Convert Link"
+      },
+      {
+        "command": "mycelium.lookupNote",
+        "title": "Mycelium: Lookup Note"
+      },
+      {
+        "command": "mycelium.lookupNoteAutoComplete",
+        "title": "Mycelium: hidden"
+      },
+      {
+        "command": "mycelium.createJournalNote",
+        "title": "Mycelium: Create Journal Note"
+      },
+      {
+        "command": "mycelium.createScratchNote",
+        "title": "Mycelium: Create Scratch Note"
+      },
+      {
+        "command": "mycelium.createNote",
+        "title": "Mycelium: Create Note"
+      },
+      {
+        "command": "mycelium.createMeetingNote",
+        "title": "Mycelium: Create Meeting Note"
+      },
+      {
+        "command": "mycelium.lookupSchema",
+        "title": "Mycelium: Lookup Schema"
+      },
+      {
+        "command": "mycelium.reloadIndex",
+        "title": "Mycelium: Reload Index"
+      },
+      {
+        "command": "mycelium.createTask",
+        "title": "Mycelium: Create Task Note"
+      },
+      {
+        "command": "mycelium.setTaskStatus",
+        "title": "Mycelium: Set Task Status"
+      },
+      {
+        "command": "mycelium.completeTask",
+        "title": "Mycelium: Complete Task"
+      },
+      {
+        "command": "mycelium.applyTemplate",
+        "title": "Mycelium: Apply Template"
+      },
+      {
+        "command": "mycelium.archiveHierarchy",
+        "title": "Mycelium: Archive Hierarchy"
+      },
+      {
+        "command": "mycelium.refactorHierarchy",
+        "title": "Mycelium: Refactor Hierarchy"
+      },
+      {
+        "command": "mycelium.goUpHierarchy",
+        "title": "Mycelium: Go Up"
+      },
+      {
+        "command": "mycelium.goNextHierarchy",
+        "title": "Mycelium: Go Next Sibling"
+      },
+      {
+        "command": "mycelium.goPrevHierarchy",
+        "title": "Mycelium: Go Previous Sibling"
+      },
+      {
+        "command": "mycelium.goDownHierarchy",
+        "title": "Mycelium: Go Down"
+      },
+      {
+        "command": "mycelium.gotoBacklink",
+        "title": "Mycelium: Go To Backlink"
+      },
+      {
+        "command": "mycelium.addAndCommit",
+        "title": "Mycelium: Workspace: Add and Commit"
+      },
+      {
+        "command": "mycelium.sync",
+        "title": "Mycelium: Workspace: Sync"
+      },
+      {
+        "command": "mycelium.vaultAdd",
+        "title": "Mycelium: Vault Add"
+      },
+      {
+        "command": "mycelium.removeVault",
+        "title": "Mycelium: Remove Vault"
+      },
+      {
+        "command": "mycelium.convertVault",
+        "title": "Mycelium: Convert Vault"
+      },
+      {
+        "command": "mycelium.createNewVault",
+        "title": "Mycelium: Create New Vault"
+      },
+      {
+        "command": "mycelium.addExistingVault",
+        "title": "Mycelium: Add Existing Vault"
+      },
+      {
+        "command": "mycelium.initWS",
+        "title": "Mycelium: Initialize Workspace"
+      },
+      {
+        "command": "mycelium.changeWS",
+        "title": "Mycelium: Change Workspace"
+      },
+      {
+        "command": "mycelium.upgradeSettings",
+        "title": "Mycelium: Upgrade Settings"
+      },
+      {
+        "command": "mycelium.configurePod",
+        "title": "Mycelium: Configure Pod"
+      },
+      {
+        "command": "mycelium.configureServiceConnection",
+        "title": "Mycelium: Configure Service Connection",
+        "enablement": "mycelium:pluginActive && mycelium:enableExportPodV2"
+      },
+      {
+        "command": "mycelium.configureExportPodV2",
+        "title": "Mycelium: Configure Export Pod V2",
+        "enablement": "mycelium:pluginActive && mycelium:enableExportPodV2"
+      },
+      {
+        "command": "mycelium.importPod",
+        "title": "Mycelium: Import Pod"
+      },
+      {
+        "command": "mycelium.importObsidianPod",
+        "title": "Mycelium: Import Obsidian Vault"
+      },
+      {
+        "command": "mycelium.exportPod",
+        "title": "Mycelium: Export Pod"
+      },
+      {
+        "command": "mycelium.exportPodv2",
+        "title": "Mycelium: Export Pod V2",
+        "enablement": "mycelium:pluginActive && mycelium:enableExportPodV2"
+      },
+      {
+        "command": "mycelium.publishPod",
+        "title": "Mycelium: Publish Pod"
+      },
+      {
+        "command": "mycelium.snapshotVault",
+        "title": "Mycelium: Snapshot Vault"
+      },
+      {
+        "command": "mycelium.restoreVault",
+        "title": "Mycelium: Restore Vault"
+      },
+      {
+        "command": "mycelium.copyNoteURL",
+        "title": "Mycelium: Copy Note URL"
+      },
+      {
+        "command": "mycelium.createHook",
+        "title": "Mycelium: Hook Create"
+      },
+      {
+        "command": "mycelium.deleteHook",
+        "title": "Mycelium: Hook Delete"
+      },
+      {
+        "command": "mycelium.registerNoteTrait",
+        "title": "Mycelium: Register Note Trait"
+      },
+      {
+        "command": "mycelium.configureNoteTraits",
+        "title": "Mycelium: Configure Note Traits"
+      },
+      {
+        "command": "mycelium.createNoteWithTraits",
+        "title": "Mycelium: Create Note with Custom Traits"
+      },
+      {
+        "command": "mycelium.publishExport",
+        "title": "Mycelium: Publish Export"
+      },
+      {
+        "command": "mycelium.publishDev",
+        "title": "Mycelium: Publish Dev"
+      },
+      {
+        "command": "mycelium.signUp",
+        "title": "Mycelium: Sign Up"
+      },
+      {
+        "command": "mycelium.signIn",
+        "title": "Mycelium: Sign In"
+      },
+      {
+        "command": "mycelium.enableTelemetry",
+        "title": "Mycelium: Enable Telemetry"
+      },
+      {
+        "command": "mycelium.disableTelemetry",
+        "title": "Mycelium: Disable Telemetry"
+      },
+      {
+        "command": "mycelium.openLink",
+        "title": "Mycelium: Open Link"
+      },
+      {
+        "command": "mycelium.pasteLink",
+        "title": "Mycelium: Paste Link"
+      },
+      {
+        "command": "mycelium.showHelp",
+        "title": "Mycelium: Show Help"
+      },
+      {
+        "command": "mycelium.showNoteGraphView",
+        "title": "Mycelium: Show Note Graph"
+      },
+      {
+        "command": "mycelium.showSchemaGraphView",
+        "title": "Mycelium: Show Schema Graph"
+      },
+      {
+        "command": "mycelium.showLegacyPreview",
+        "title": "Mycelium: Show Preview (legacy)"
+      },
+      {
+        "command": "mycelium.togglePreview",
+        "title": "Mycelium: Toggle Preview",
+        "icon": "$(open-preview)"
+      },
+      {
+        "command": "mycelium.togglePreviewLock",
+        "title": "Mycelium: Toggle Preview Lock",
+        "icon": "$(lock)"
+      },
+      {
+        "command": "mycelium.pasteFile",
+        "title": "Mycelium: Paste File"
+      },
+      {
+        "command": "mycelium.configureRaw",
+        "title": "Mycelium: Configure (yaml)"
+      },
+      {
+        "command": "mycelium.configureUI",
+        "title": "Mycelium: Configure (UI)"
+      },
+      {
+        "command": "mycelium.configureGraphStyle",
+        "title": "Mycelium: Configure Graph Style (css)"
+      },
+      {
+        "command": "mycelium.configureLocalOverride",
+        "title": "Mycelium: Configure Local Override"
+      },
+      {
+        "command": "mycelium.seedAdd",
+        "title": "Mycelium: Add Seed to Workspace"
+      },
+      {
+        "command": "mycelium.seedRemove",
+        "title": "Mycelium: Remove Seed from Workspace"
+      },
+      {
+        "command": "mycelium.seedBrowse",
+        "title": "Mycelium: Browse the Seed Registry"
+      },
+      {
+        "command": "mycelium.dev.doctor",
+        "title": "Mycelium: Doctor"
+      },
+      {
+        "command": "mycelium.dev.dumpState",
+        "title": "Mycelium: Dump State"
+      },
+      {
+        "command": "mycelium.dev.devTrigger",
+        "title": "Mycelium:Dev: Dev Trigger"
+      },
+      {
+        "command": "mycelium.dev.resetConfig",
+        "title": "Mycelium:Dev: Reset Config"
+      },
+      {
+        "command": "mycelium.dev.runMigration",
+        "title": "Mycelium:Dev: Run Migration"
+      },
+      {
+        "command": "mycelium.dev.migrateSelfContained",
+        "title": "Mycelium: Migrate to Self Contained Vault"
+      },
+      {
+        "command": "mycelium.dev.openLogs",
+        "title": "Mycelium:Dev: Open Logs"
+      },
+      {
+        "command": "mycelium.diagnosticsReport",
+        "title": "Mycelium:Dev: Diagnostics Report"
+      },
+      {
+        "command": "mycelium.showWelcomePage",
+        "title": "Mycelium: Launch Tutorial"
+      },
+      {
+        "command": "mycelium.launchTutorialWorkspace",
+        "title": "Mycelium: Launch Tutorial Workspace"
+      },
+      {
+        "command": "mycelium.openBackup",
+        "title": "Mycelium: Open Backup"
+      },
+      {
+        "command": "mycelium.instrumentedWrapperCommand",
+        "title": "Mycelium: Instrumented Wrapper Command"
+      },
+      {
+        "command": "mycelium.dev.validateEngine",
+        "title": "Mycelium:Dev: Validate Engine"
+      }
+    ],
+    "menus": {
+      "commandPalette": [
+        {
+          "command": "mycelium.treeView.expandAll",
+          "when": "mycelium:devMode"
+        },
+        {
+          "command": "mycelium.treeView.createNote",
+          "when": "false"
+        },
+        {
+          "command": "mycelium.treeView.expandStub",
+          "when": "false"
+        },
+        {
+          "command": "mycelium.treeView.gotoNote",
+          "when": "false"
+        },
+        {
+          "command": "mycelium.browseNote",
+          "when": "mycelium:pluginActive && shellExecutionSupported"
+        },
+        {
+          "command": "mycelium.contributeToCause",
+          "when": "shellExecutionSupported"
+        },
+        {
+          "command": "mycelium.goto",
+          "when": "mycelium:pluginActive && shellExecutionSupported"
+        },
+        {
+          "command": "mycelium.gotoNote",
+          "when": "mycelium:pluginActive && shellExecutionSupported"
+        },
+        {
+          "command": "mycelium.createSchemaFromHierarchy",
+          "when": "mycelium:pluginActive && shellExecutionSupported"
+        },
+        {
+          "command": "mycelium.createDailyJournalNote",
+          "when": "mycelium:pluginActive && shellExecutionSupported"
+        },
+        {
+          "command": "mycelium.copyNoteLink",
+          "when": "mycelium:pluginActive && shellExecutionSupported"
+        },
+        {
+          "command": "mycelium.copyNoteRef",
+          "when": "mycelium:pluginActive && shellExecutionSupported"
+        },
+        {
+          "command": "mycelium.copyToClipboard",
+          "when": "false"
+        },
+        {
+          "command": "mycelium.copyCodespaceURL",
+          "when": "mycelium:pluginActive && shellExecutionSupported"
+        },
+        {
+          "command": "mycelium.copyAs",
+          "when": "mycelium:pluginActive && shellExecutionSupported"
+        },
+        {
+          "command": "mycelium.delete",
+          "when": "mycelium:pluginActive && shellExecutionSupported"
+        },
+        {
+          "command": "mycelium.insertNoteLink",
+          "when": "mycelium:pluginActive && shellExecutionSupported"
+        },
+        {
+          "command": "mycelium.insertNoteIndex",
+          "when": "mycelium:pluginActive && shellExecutionSupported"
+        },
+        {
+          "command": "mycelium.moveNote",
+          "when": "mycelium:pluginActive && shellExecutionSupported"
+        },
+        {
+          "command": "mycelium.moveSelectionTo",
+          "when": "mycelium:pluginActive && shellExecutionSupported"
+        },
+        {
+          "command": "mycelium.mergeNote",
+          "when": "mycelium:pluginActive && shellExecutionSupported"
+        },
+        {
+          "command": "mycelium.randomNote",
+          "when": "mycelium:pluginActive && shellExecutionSupported"
+        },
+        {
+          "command": "mycelium.renameNoteV2a",
+          "when": "false"
+        },
+        {
+          "command": "mycelium.renameNote",
+          "when": "mycelium:pluginActive && shellExecutionSupported"
+        },
+        {
+          "command": "mycelium.renameHeader",
+          "when": "mycelium:pluginActive && shellExecutionSupported"
+        },
+        {
+          "command": "mycelium.moveHeader",
+          "when": "mycelium:pluginActive && shellExecutionSupported"
+        },
+        {
+          "command": "mycelium.convertCandidateLink",
+          "when": "false"
+        },
+        {
+          "command": "mycelium.convertLink",
+          "when": "mycelium:pluginActive && shellExecutionSupported"
+        },
+        {
+          "command": "mycelium.lookupNote",
+          "when": "mycelium:pluginActive"
+        },
+        {
+          "command": "mycelium.lookupNoteAutoComplete",
+          "when": "mycelium:pluginActive && mycelium:noteLookupActive && !editorFocus && !view"
+        },
+        {
+          "command": "mycelium.createJournalNote",
+          "when": "mycelium:pluginActive && shellExecutionSupported"
+        },
+        {
+          "command": "mycelium.createScratchNote",
+          "when": "mycelium:pluginActive && shellExecutionSupported"
+        },
+        {
+          "command": "mycelium.createNote",
+          "when": "mycelium:pluginActive && shellExecutionSupported"
+        },
+        {
+          "command": "mycelium.createMeetingNote",
+          "when": "mycelium:pluginActive && shellExecutionSupported"
+        },
+        {
+          "command": "mycelium.lookupSchema",
+          "when": "mycelium:pluginActive && shellExecutionSupported"
+        },
+        {
+          "command": "mycelium.reloadIndex",
+          "when": "mycelium:pluginActive && shellExecutionSupported"
+        },
+        {
+          "command": "mycelium.createTask",
+          "when": "mycelium:pluginActive && shellExecutionSupported"
+        },
+        {
+          "command": "mycelium.setTaskStatus",
+          "when": "mycelium:pluginActive && shellExecutionSupported"
+        },
+        {
+          "command": "mycelium.completeTask",
+          "when": "mycelium:pluginActive && shellExecutionSupported"
+        },
+        {
+          "command": "mycelium.applyTemplate",
+          "when": "mycelium:pluginActive && shellExecutionSupported"
+        },
+        {
+          "command": "mycelium.archiveHierarchy",
+          "when": "mycelium:pluginActive && shellExecutionSupported"
+        },
+        {
+          "command": "mycelium.refactorHierarchy",
+          "when": "mycelium:pluginActive && shellExecutionSupported"
+        },
+        {
+          "command": "mycelium.goUpHierarchy",
+          "when": "mycelium:pluginActive && shellExecutionSupported"
+        },
+        {
+          "command": "mycelium.goNextHierarchy",
+          "when": "mycelium:pluginActive && shellExecutionSupported"
+        },
+        {
+          "command": "mycelium.goPrevHierarchy",
+          "when": "mycelium:pluginActive && shellExecutionSupported"
+        },
+        {
+          "command": "mycelium.goDownHierarchy",
+          "when": "mycelium:pluginActive && shellExecutionSupported"
+        },
+        {
+          "command": "mycelium.gotoBacklink",
+          "when": "false"
+        },
+        {
+          "command": "mycelium.addAndCommit",
+          "when": "mycelium:pluginActive && shellExecutionSupported"
+        },
+        {
+          "command": "mycelium.sync",
+          "when": "mycelium:pluginActive && shellExecutionSupported"
+        },
+        {
+          "command": "mycelium.vaultAdd",
+          "when": "mycelium:pluginActive && shellExecutionSupported"
+        },
+        {
+          "command": "mycelium.removeVault",
+          "when": "mycelium:pluginActive && shellExecutionSupported"
+        },
+        {
+          "command": "mycelium.convertVault",
+          "when": "mycelium:pluginActive && shellExecutionSupported"
+        },
+        {
+          "command": "mycelium.createNewVault",
+          "when": "mycelium:pluginActive && shellExecutionSupported"
+        },
+        {
+          "command": "mycelium.addExistingVault",
+          "when": "mycelium:pluginActive && shellExecutionSupported"
+        },
+        {
+          "command": "mycelium.initWS",
+          "when": "shellExecutionSupported"
+        },
+        {
+          "command": "mycelium.changeWS",
+          "when": "shellExecutionSupported"
+        },
+        {
+          "command": "mycelium.upgradeSettings",
+          "when": "mycelium:pluginActive && shellExecutionSupported"
+        },
+        {
+          "command": "mycelium.configurePod",
+          "when": "mycelium:pluginActive && shellExecutionSupported"
+        },
+        {
+          "command": "mycelium.importPod",
+          "when": "mycelium:pluginActive && shellExecutionSupported"
+        },
+        {
+          "command": "mycelium.importObsidianPod",
+          "when": "mycelium:pluginActive && shellExecutionSupported"
+        },
+        {
+          "command": "mycelium.exportPod",
+          "when": "mycelium:pluginActive && shellExecutionSupported"
+        },
+        {
+          "command": "mycelium.publishPod",
+          "when": "mycelium:pluginActive && shellExecutionSupported"
+        },
+        {
+          "command": "mycelium.snapshotVault",
+          "when": "mycelium:pluginActive && shellExecutionSupported"
+        },
+        {
+          "command": "mycelium.restoreVault",
+          "when": "mycelium:pluginActive && shellExecutionSupported"
+        },
+        {
+          "command": "mycelium.copyNoteURL",
+          "when": "mycelium:pluginActive"
+        },
+        {
+          "command": "mycelium.createHook",
+          "when": "mycelium:pluginActive && shellExecutionSupported"
+        },
+        {
+          "command": "mycelium.deleteHook",
+          "when": "mycelium:pluginActive && shellExecutionSupported"
+        },
+        {
+          "command": "mycelium.registerNoteTrait",
+          "when": "false"
+        },
+        {
+          "command": "mycelium.configureNoteTraits",
+          "when": "mycelium:pluginActive && shellExecutionSupported"
+        },
+        {
+          "command": "mycelium.createNoteWithTraits",
+          "when": "mycelium:pluginActive && shellExecutionSupported"
+        },
+        {
+          "command": "mycelium.publishExport",
+          "when": "mycelium:pluginActive && shellExecutionSupported"
+        },
+        {
+          "command": "mycelium.publishDev",
+          "when": "mycelium:pluginActive && shellExecutionSupported"
+        },
+        {
+          "command": "mycelium.signUp",
+          "when": "shellExecutionSupported"
+        },
+        {
+          "command": "mycelium.signIn",
+          "when": "shellExecutionSupported"
+        },
+        {
+          "command": "mycelium.enableTelemetry",
+          "when": "shellExecutionSupported"
+        },
+        {
+          "command": "mycelium.disableTelemetry",
+          "when": "shellExecutionSupported"
+        },
+        {
+          "command": "mycelium.openLink",
+          "when": "false"
+        },
+        {
+          "command": "mycelium.pasteLink",
+          "when": "mycelium:pluginActive && shellExecutionSupported"
+        },
+        {
+          "command": "mycelium.showHelp",
+          "when": "shellExecutionSupported"
+        },
+        {
+          "command": "mycelium.showNoteGraphView",
+          "when": "mycelium:pluginActive && shellExecutionSupported"
+        },
+        {
+          "command": "mycelium.showSchemaGraphView",
+          "when": "mycelium:pluginActive && shellExecutionSupported"
+        },
+        {
+          "command": "mycelium.showLegacyPreview",
+          "when": "mycelium:pluginActive && mycelium:hasLegacyPreview"
+        },
+        {
+          "command": "mycelium.togglePreview",
+          "when": "mycelium:pluginActive"
+        },
+        {
+          "command": "mycelium.togglePreviewLock",
+          "when": "mycelium:pluginActive"
+        },
+        {
+          "command": "mycelium.pasteFile",
+          "when": "mycelium:pluginActive && shellExecutionSupported"
+        },
+        {
+          "command": "mycelium.configureRaw",
+          "when": "mycelium:pluginActive && shellExecutionSupported"
+        },
+        {
+          "command": "mycelium.configureUI",
+          "when": "mycelium:pluginActive && shellExecutionSupported"
+        },
+        {
+          "command": "mycelium.configureGraphStyle",
+          "when": "mycelium:pluginActive && shellExecutionSupported"
+        },
+        {
+          "command": "mycelium.configureLocalOverride",
+          "when": "mycelium:pluginActive && shellExecutionSupported"
+        },
+        {
+          "command": "mycelium.seedAdd",
+          "when": "mycelium:pluginActive && shellExecutionSupported"
+        },
+        {
+          "command": "mycelium.seedRemove",
+          "when": "mycelium:pluginActive && shellExecutionSupported"
+        },
+        {
+          "command": "mycelium.seedBrowse",
+          "when": "mycelium:pluginActive && shellExecutionSupported"
+        },
+        {
+          "command": "mycelium.dev.doctor",
+          "when": "mycelium:pluginActive && shellExecutionSupported"
+        },
+        {
+          "command": "mycelium.dev.dumpState",
+          "when": "mycelium:pluginActive && shellExecutionSupported"
+        },
+        {
+          "command": "mycelium.dev.devTrigger",
+          "when": "mycelium:devMode"
+        },
+        {
+          "command": "mycelium.dev.resetConfig",
+          "when": "shellExecutionSupported"
+        },
+        {
+          "command": "mycelium.dev.runMigration",
+          "when": "mycelium:pluginActive && shellExecutionSupported"
+        },
+        {
+          "command": "mycelium.dev.migrateSelfContained",
+          "when": "mycelium:pluginActive && shellExecutionSupported"
+        },
+        {
+          "command": "mycelium.dev.openLogs",
+          "when": "shellExecutionSupported"
+        },
+        {
+          "command": "mycelium.diagnosticsReport",
+          "when": "mycelium:pluginActive && shellExecutionSupported"
+        },
+        {
+          "command": "mycelium.showWelcomePage",
+          "when": "shellExecutionSupported"
+        },
+        {
+          "command": "mycelium.launchTutorialWorkspace",
+          "when": "false"
+        },
+        {
+          "command": "mycelium.openBackup",
+          "when": "mycelium:pluginActive && shellExecutionSupported"
+        },
+        {
+          "command": "mycelium.instrumentedWrapperCommand",
+          "when": "false"
+        },
+        {
+          "command": "mycelium.dev.validateEngine",
+          "when": "mycelium:pluginActive && shellExecutionSupported"
+        }
+      ],
+      "view/title": [
+        {
+          "command": "mycelium.backlinks.sortByLastUpdated",
+          "when": "view == mycelium.backlinks && mycelium:backlinksSortOrder == PathNames",
+          "group": "sort@1"
+        },
+        {
+          "command": "mycelium.backlinks.sortByLastUpdatedChecked",
+          "when": "view == mycelium.backlinks && mycelium:backlinksSortOrder == LastUpdated",
+          "group": "sort@1"
+        },
+        {
+          "command": "mycelium.backlinks.sortByPathNames",
+          "when": "view == mycelium.backlinks && mycelium:backlinksSortOrder == LastUpdated",
+          "group": "sort@2"
+        },
+        {
+          "command": "mycelium.backlinks.sortByPathNamesChecked",
+          "when": "view == mycelium.backlinks && mycelium:backlinksSortOrder == PathNames",
+          "group": "sort@2"
+        },
+        {
+          "command": "mycelium.backlinks.expandAll",
+          "when": "view == mycelium.backlinks",
+          "group": "navigation@2"
+        },
+        {
+          "command": "mycelium.treeView.labelByTitle",
+          "when": "view == mycelium.treeView && mycelium:treeviewItemLabelType == filename"
+        },
+        {
+          "command": "mycelium.treeView.labelByFilename",
+          "when": "view == mycelium.treeView && mycelium:treeviewItemLabelType == title"
+        },
+        {
+          "command": "mycelium.treeView.expandAll",
+          "when": "view == mycelium.treeView && mycelium:devMode",
+          "group": "navigation@2"
+        },
+        {
+          "command": "mycelium.treeView.createNote",
+          "when": "view == mycelium.treeView",
+          "group": "navigation@2"
+        },
+        {
+          "command": "mycelium.graph-panel.increaseDepth",
+          "when": "view == mycelium.graph-panel",
+          "group": "navigation@2"
+        },
+        {
+          "command": "mycelium.graph-panel.decreaseDepth",
+          "when": "view == mycelium.graph-panel",
+          "group": "navigation@2"
+        },
+        {
+          "command": "mycelium.graph-panel.showBacklinksChecked",
+          "when": "view == mycelium.graph-panel && mycelium.graph-panel.showBacklinks"
+        },
+        {
+          "command": "mycelium.graph-panel.showOutwardLinksChecked",
+          "when": "view == mycelium.graph-panel && mycelium.graph-panel.showOutwardLinks"
+        },
+        {
+          "command": "mycelium.graph-panel.showHierarchyChecked",
+          "when": "view == mycelium.graph-panel && mycelium.graph-panel.showHierarchy"
+        },
+        {
+          "command": "mycelium.graph-panel.showBacklinks",
+          "when": "view == mycelium.graph-panel && !mycelium.graph-panel.showBacklinks"
+        },
+        {
+          "command": "mycelium.graph-panel.showOutwardLinks",
+          "when": "view == mycelium.graph-panel && !mycelium.graph-panel.showOutwardLinks"
+        },
+        {
+          "command": "mycelium.graph-panel.showHierarchy",
+          "when": "view == mycelium.graph-panel && !mycelium.graph-panel.showHierarchy"
+        }
+      ],
+      "explorer/context": [
+        {
+          "when": "explorerResourceIsFolder && mycelium:pluginActive && workspaceFolderCount > 1 && shellExecutionSupported",
+          "command": "mycelium.vaultAdd",
+          "group": "2_workspace"
+        },
+        {
+          "when": "explorerResourceIsFolder && mycelium:pluginActive && shellExecutionSupported",
+          "command": "mycelium.removeVault",
+          "group": "2_workspace"
+        },
+        {
+          "when": "resourceExtname == .md && mycelium:pluginActive && shellExecutionSupported || resourceExtname == .yml && mycelium:pluginActive && shellExecutionSupported",
+          "command": "mycelium.delete",
+          "group": "2_workspace"
+        },
+        {
+          "when": "resourceExtname == .md && mycelium:pluginActive && shellExecutionSupported",
+          "command": "mycelium.moveNote",
+          "group": "2_workspace"
+        },
+        {
+          "command": "mycelium.togglePreview",
+          "when": "resourceLangId == markdown && mycelium:pluginActive",
+          "group": "navigation"
+        }
+      ],
+      "editor/context": [
+        {
+          "when": "resourceExtname == .md && mycelium:pluginActive && shellExecutionSupported",
+          "command": "mycelium.copyNoteLink",
+          "group": "2_workspace"
+        }
+      ],
+      "editor/title": [
+        {
+          "command": "mycelium.togglePreview",
+          "when": "editorLangId == markdown && !notebookEditorFocused && mycelium:pluginActive",
+          "group": "navigation"
+        }
+      ],
+      "editor/title/context": [
+        {
+          "command": "mycelium.togglePreview",
+          "when": "resourceLangId == markdown && mycelium:pluginActive",
+          "group": "1_open"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "mycelium.delete",
+          "when": "view == mycelium.treeView && viewItem == note && shellExecutionSupported"
+        },
+        {
+          "command": "mycelium.createNote",
+          "when": "view == mycelium.treeView && shellExecutionSupported"
+        },
+        {
+          "command": "mycelium.treeView.gotoNote",
+          "when": "view == mycelium.treeView && viewItem == stub && shellExecutionSupported",
+          "group": "inline"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "mycelium",
+      "properties": {
+        "mycelium.dailyJournalDomain": {
+          "type": "string",
+          "default": "daily",
+          "description": "DEPRECATED. Use journal settings in mycelium.yml"
+        },
+        "mycelium.defaultJournalName": {
+          "type": "string",
+          "default": "journal",
+          "description": "DEPRECATED. Use journal settings in mycelium.yml"
+        },
+        "mycelium.defaultJournalDateFormat": {
+          "type": "string",
+          "default": "y.MM.dd",
+          "description": "DEPRECATED. Use journal settings in mycelium.yml"
+        },
+        "mycelium.defaultJournalAddBehavior": {
+          "default": "childOfDomain",
+          "type": "string",
+          "description": "DEPRECATED. Use journal settings in mycelium.yml",
+          "enum": [
+            "childOfDomain",
+            "childOfDomainNamespace",
+            "childOfCurrent",
+            "asOwnDomain"
+          ]
+        },
+        "mycelium.defaultScratchName": {
+          "type": "string",
+          "default": "scratch",
+          "description": "DEPRECATED. Use scratch settings in mycelium.yml"
+        },
+        "mycelium.defaultScratchDateFormat": {
+          "type": "string",
+          "default": "y.MM.dd.HHmmss",
+          "description": "DEPRECATED. Use scratch settings in mycelium.yml"
+        },
+        "mycelium.defaultScratchAddBehavior": {
+          "default": "asOwnDomain",
+          "type": "string",
+          "description": "DEPRECATED. Use scratch settings in mycelium.yml",
+          "enum": [
+            "childOfDomain",
+            "childOfDomainNamespace",
+            "childOfCurrent",
+            "asOwnDomain"
+          ]
+        },
+        "mycelium.copyNoteUrlRoot": {
+          "type": "string",
+          "description": "override root url when getting note url"
+        },
+        "mycelium.linkSelectAutoTitleBehavior": {
+          "type": "string",
+          "description": "Control title behavior when using selection2link with lookup",
+          "enum": [
+            "none",
+            "slug"
+          ],
+          "default": "slug"
+        },
+        "mycelium.defaultLookupCreateBehavior": {
+          "default": "selectionExtract",
+          "type": "string",
+          "description": "when creating a new note with selected text, define behavior for selected text",
+          "enum": [
+            "selection2link",
+            "selectionExtract"
+          ]
+        },
+        "mycelium.defaultTimestampDecorationFormat": {
+          "default": "DATETIME_MED",
+          "type": "string",
+          "description": "Decide how human readable timestamp decoration is displayed",
+          "enum": [
+            "DATETIME_FULL",
+            "DATETIME_FULL_WITH_SECONDS",
+            "DATETIME_HUGE",
+            "DATETIME_HUGE_WITH_SECONDS",
+            "DATETIME_MED",
+            "DATETIME_MED_WITH_SECONDS",
+            "DATETIME_SHORT",
+            "DATETIME_SHORT_WITH_SECONDS",
+            "DATE_FULL",
+            "DATE_HUGE",
+            "DATE_MED",
+            "DATE_MED_WITH_WEEKDAY",
+            "DATE_SHORT",
+            "TIME_24_SIMPLE",
+            "TIME_24_WITH_LONG_OFFSET",
+            "TIME_24_WITH_SECONDS",
+            "TIME_24_WITH_SHORT_OFFSET",
+            "TIME_SIMPLE",
+            "TIME_WITH_LONG_OFFSET",
+            "TIME_WITH_SECONDS",
+            "TIME_WITH_SHORT_OFFSET"
+          ]
+        },
+        "mycelium.rootDir": {
+          "type": "string",
+          "default": "",
+          "description": "location of mycelium workspace"
+        },
+        "mycelium.myceliumDir": {
+          "type": "string",
+          "default": "",
+          "description": "DEPRECATED. Use journal settings in mycelium.yml"
+        },
+        "mycelium.logLevel": {
+          "type": "string",
+          "default": "info",
+          "description": "control verbosity of mycelium logs",
+          "enum": [
+            "debug",
+            "info",
+            "error"
+          ]
+        },
+        "mycelium.trace.server": {
+          "enum": [
+            "off",
+            "messages",
+            "verbose"
+          ],
+          "type": "string",
+          "default": "messages",
+          "description": "LSP log level"
+        },
+        "mycelium.serverPort": {
+          "type": "number",
+          "description": "port for server. If not set, will be randomly generated at startup."
+        },
+        "mycelium.enableSelfContainedVaultWorkspace": {
+          "type": "boolean",
+          "default": true,
+          "description": "When enabled, newly created workspaces will be created as self contained vaults."
+        }
+      }
+    },
+    "keybindings": [
+      {
+        "command": "mycelium.goto",
+        "when": "editorFocus"
+      },
+      {
+        "command": "mycelium.gotoNote",
+        "key": "ctrl+enter",
+        "when": "editorFocus"
+      },
+      {
+        "command": "mycelium.createSchemaFromHierarchy",
+        "when": "editorFocus && mycelium:pluginActive"
+      },
+      {
+        "command": "mycelium.createDailyJournalNote",
+        "key": "ctrl+shift+i",
+        "mac": "cmd+shift+i",
+        "when": "mycelium:pluginActive && shellExecutionSupported"
+      },
+      {
+        "command": "mycelium.copyNoteLink",
+        "key": "ctrl+shift+c",
+        "mac": "cmd+shift+c",
+        "when": "editorFocus && mycelium:pluginActive"
+      },
+      {
+        "command": "mycelium.copyNoteRef",
+        "key": "ctrl+shift+r",
+        "mac": "cmd+shift+r",
+        "when": "editorFocus && mycelium:pluginActive"
+      },
+      {
+        "command": "mycelium.copyAs",
+        "key": "ctrl+k ctrl+c",
+        "mac": "cmd+k cmd+c",
+        "when": "mycelium:pluginActive"
+      },
+      {
+        "command": "mycelium.delete",
+        "key": "ctrl+shift+d",
+        "mac": "cmd+shift+d",
+        "when": "mycelium:pluginActive && shellExecutionSupported"
+      },
+      {
+        "command": "mycelium.lookupNote",
+        "mac": "cmd+L",
+        "key": "ctrl+l",
+        "when": "mycelium:pluginActive"
+      },
+      {
+        "command": "mycelium.lookupNoteAutoComplete",
+        "key": "Tab",
+        "when": "mycelium:pluginActive && mycelium:noteLookupActive && !editorFocus && !view"
+      },
+      {
+        "command": "mycelium.createJournalNote",
+        "key": "ctrl+shift+j",
+        "mac": "cmd+shift+j",
+        "args": {
+          "noteType": "journal"
+        },
+        "when": "mycelium:pluginActive && shellExecutionSupported"
+      },
+      {
+        "command": "mycelium.createScratchNote",
+        "key": "ctrl+k s",
+        "mac": "cmd+k s",
+        "when": "mycelium:pluginActive && shellExecutionSupported"
+      },
+      {
+        "command": "mycelium.lookupSchema",
+        "mac": "cmd+shift+L",
+        "key": "ctrl+shift+l",
+        "when": "mycelium:pluginActive && shellExecutionSupported"
+      },
+      {
+        "command": "mycelium.goUpHierarchy",
+        "mac": "cmd+shift+up",
+        "key": "ctrl+shift+up",
+        "when": "editorFocus && mycelium:pluginActive"
+      },
+      {
+        "command": "mycelium.goNextHierarchy",
+        "key": "ctrl+shift+]",
+        "when": "editorFocus && mycelium:pluginActive"
+      },
+      {
+        "command": "mycelium.goPrevHierarchy",
+        "key": "ctrl+shift+[",
+        "when": "editorFocus && mycelium:pluginActive"
+      },
+      {
+        "command": "mycelium.goDownHierarchy",
+        "mac": "cmd+shift+down",
+        "key": "ctrl+shift+down",
+        "when": "editorFocus && mycelium:pluginActive"
+      },
+      {
+        "command": "mycelium.copyNoteURL",
+        "mac": "cmd+shift+u",
+        "windows": "ctrl+shift+u",
+        "when": "editorFocus && mycelium:pluginActive"
+      },
+      {
+        "command": "mycelium.showLegacyPreview",
+        "windows": "windows+ctrl+p",
+        "mac": "cmd+ctrl+p",
+        "when": "mycelium:pluginActive && mycelium:hasLegacyPreview"
+      },
+      {
+        "command": "mycelium.togglePreview",
+        "key": "ctrl+k v",
+        "mac": "cmd+ctrl+p",
+        "when": "mycelium:pluginActive"
+      }
+    ],
+    "markdown.previewStyles": [
+      "./media/fontello/css/fontello.css",
+      "./media/markdown.css"
+    ],
+    "yamlValidation": [
+      {
+        "fileMatch": "mycelium.yml",
+        "url": "./dist/mycelium-yml.validator.json"
+      }
+    ]
+  },
+  "icon": "media/logo.png",
+  "binary": {
+    "module_name": "node_sqlite3",
+    "module_path": "./lib/binding/napi-v{napi_build_version}-{platform}-{libc}-{arch}",
+    "host": "https://github.com/TryGhost/node-sqlite3/releases/download/",
+    "remote_path": "v5.1.2",
+    "package_name": "napi-v{napi_build_version}-{platform}-{libc}-{arch}.tar.gz",
+    "napi_versions": [
+      6
+    ]
+  },
+  "scripts": {
+    "webpack": "cross-env SKIP_SENTRY=1 DETECT_CIRCULAR_DEPS=1 webpack --config webpack.dev.js",
+    "webpack:dev:watch": "yarn webpack --watch",
+    "webpack:prod": "webpack --config webpack.prod.js",
+    "watch": "yarn compile --watch",
+    "buildCI": "yarn rimraf out && yarn compile",
+    "build": "yarn compile",
+    "build:dev": "yarn webpack",
+    "build:prod": "yarn webpack:prod && ./scripts/varSub.sh && yarn package-web",
+    "compile": "tsc -p tsconfig.build.json ",
+    "test": "node ./out/src/test/runTestInteg.js",
+    "test-web": "node ./out/src/web/test/runWebIntegTest.js",
+    "format": "echo nop",
+    "vscode:uninstall": "node ./out/src/scripts/uninstallHook.js",
+    "deploy:vscode": "vsce publish --yarn",
+    "deploy:vscode:vsix": "vsce --version && vsce publish --packagePath",
+    "deploy:ovsx": "ovsx publish --yarn",
+    "deploy:ovsx:vsix": "ovsx publish ",
+    "clean": "yarn rimraf out dist node_modules && yarn clean:assets",
+    "clean:assets": "yarn rimraf assets/{static}",
+    "rimraf": "npx rimraf",
+    "vscode:prepublish": "npm run package-web",
+    "compile-web": "webpack --config webpack.webext.js",
+    "watch-web": "webpack --watch --config webpack.webext.js",
+    "package-web": "webpack --mode production --devtool hidden-source-map --config webpack.webext.js",
+    "open-in-browser": "vscode-test-web --extensionDevelopmentPath=. ~/mycelium-20/",
+    "test-in-browser": "mkdir -p testOutput && vscode-test-web --extensionDevelopmentPath=. --extensionTestsPath=dist/web/test/suite/index.js --headless testOutput",
+    "download-sqlite-binary": "node-pre-gyp install",
+    "perf-test": "node ./out/src/test/runPerfTest.js"
+  },
+  "devDependencies": {
+    "@myceliumhq/common-test-utils": "^0.124.0",
+    "@myceliumhq/engine-test-utils": "^0.124.0",
+    "@sentry/webpack-plugin": "^1.17.1",
+    "@types/execa": "^2.0.0",
+    "@types/fs-extra": "^9.0.1",
+    "@types/glob": "^7.1.1",
+    "@types/is-url": "^1.2.30",
+    "@types/lodash": "^4.14.155",
+    "@types/luxon": "^1.25.0",
+    "@types/markdown-it": "^10.0.2",
+    "@types/mocha": "^7.0.2",
+    "@types/node": "^13.11.0",
+    "@types/open": "^6.2.1",
+    "@types/open-graph-scraper": "^4.7.0",
+    "@types/semver": "^7.3.1",
+    "@types/string-similarity": "^4.0.0",
+    "@types/webpack-env": "^1.17.0",
+    "@vscode/test-web": "^0.0.27",
+    "circular-dependency-plugin": "^5.2.2",
+    "copy-webpack-plugin": "^9.0.1",
+    "cross-env": "^7.0.3",
+    "crypto-randomuuid": "^1.0.0",
+    "glob": "^7.1.6",
+    "ignore-loader": "^0.1.2",
+    "mocha": "^7.1.2",
+    "node-loader": "^2.0.0",
+    "node-pre-gyp": "^0.17.0",
+    "ovsx": "^0.5.1",
+    "reflect-metadata": "^0.1.13",
+    "rimraf": "^3.0.2",
+    "source-map-loader": "^3.0.0",
+    "terser-webpack-plugin": "^5.2.4",
+    "ts-loader": "^8.0.0",
+    "ts-node": "^8.10.2",
+    "ts-sinon": "^2.0.2",
+    "tsyringe": "^4.7.0",
+    "vsce": "^2.10.0",
+    "vscode-test": "^1.3.0",
+    "webpack": "^5.56.0",
+    "webpack-bundle-analyzer": "^4.4.2",
+    "webpack-cli": "^4.8.0",
+    "webpack-merge": "^5.8.0"
+  },
+  "dependencies": {
+    "@myceliumhq/api-server": "^0.124.0",
+    "@myceliumhq/common-all": "^0.124.0",
+    "@myceliumhq/common-server": "^0.124.0",
+    "@myceliumhq/engine-server": "^0.124.0",
+    "@myceliumhq/pods-core": "^0.124.0",
+    "@sentry/integrations": "7.11.1",
+    "@sentry/node": "7.11.1",
+    "@types/vscode": "1.77.0",
+    "browserify": "17.0.0",
+    "cross-path-sort": "1.0.0",
+    "execa": "4.0.2",
+    "fs-extra": "9.1.0",
+    "is-url": "1.2.4",
+    "lodash": "4.17.15",
+    "luxon": "1.25.0",
+    "markdown-it": "11.0.0",
+    "open": "8.2.1",
+    "open-graph-scraper": "4.7.1",
+    "path-browserify": "1.0.1",
+    "process": "0.11.10",
+    "query-string": "7.0.1",
+    "semver": "7.3.2",
+    "stream-browserify": "3.0.0",
+    "stream-http": "3.2.0",
+    "string-similarity": "4.0.4",
+    "textextensions": "5.15.0",
+    "title": "3.4.4",
+    "unist-util-visit": "2.0.3",
+    "util": "0.12.4",
+    "vscode-languageclient": "6.1.3",
+    "vscode-uri": "3.0.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com/myceliumhq/mycelium.git",
+    "directory": "packages/plugin-core"
+  },
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": "limited",
+      "description": "All features are enabled except for hooks.",
+      "restrictedConfigurations": []
+    }
+  }
+}

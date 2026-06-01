@@ -1,0 +1,52 @@
+import {
+  MyceliumEditorViewKey,
+  getWebEditorViewEntry,
+} from "@myceliumhq/common-all";
+import vscode from "vscode";
+import { MYCELIUM_COMMANDS } from "../constants";
+import { ExtensionProvider } from "../ExtensionProvider";
+import { WebViewUtils } from "../views/utils";
+import { BasicCommand } from "./base";
+
+type CommandOpts = {};
+
+type CommandOutput = void;
+
+export class ShowSchemaGraphCommand extends BasicCommand<
+  CommandOpts,
+  CommandOutput
+> {
+  key = MYCELIUM_COMMANDS.SHOW_SCHEMA_GRAPH.key;
+
+  _panel: vscode.WebviewPanel;
+
+  constructor(panel: vscode.WebviewPanel) {
+    super();
+    this._panel = panel;
+  }
+
+  async gatherInputs(): Promise<any> {
+    return {};
+  }
+
+  async execute() {
+    const { bundleName: name } = getWebEditorViewEntry(
+      MyceliumEditorViewKey.SCHEMA_GRAPH
+    );
+    const ext = ExtensionProvider.getExtension();
+    const port = ext.port!;
+    const engine = ext.getEngine();
+    const { wsRoot } = engine;
+    const webViewAssets = WebViewUtils.getJsAndCss();
+    const html = await WebViewUtils.getWebviewContent({
+      ...webViewAssets,
+      port,
+      wsRoot,
+      panel: this._panel,
+      name,
+    });
+
+    this._panel.webview.html = html;
+    this._panel.reveal();
+  }
+}
