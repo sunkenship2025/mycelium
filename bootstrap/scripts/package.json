@@ -1,0 +1,39 @@
+{
+  "name": "@myceliumhq/bootstrap",
+  "description": "",
+  "private": true,
+  "license": "Apache 2.0",
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com/myceliumhq/mycelium.git",
+    "directory": "bootstrap/scripts"
+  },
+  "author": {
+    "name": "Kevin Lin",
+    "email": "kevin@mycelium.so",
+    "url": "https://kevinslin.com"
+  },
+  "keywords": [],
+  "files": [
+    "lib"
+  ],
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "scripts": {
+    "compile": "tsc -p tsconfig.build.json ",
+    "watch": "yarn compile --watch"
+  },
+  "dependencies": {
+    "execa": "^5.0.0"
+  },
+  "devDependencies": {},
+  "engines": {
+    "node": ">=12.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "jest": {
+    "preset": "ts-jest"
+  }
+}

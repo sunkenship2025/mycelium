@@ -1,0 +1,9 @@
+node_modules
+.mycelium.*
+build
+seeds
+.next
+pods/service-connections
+
+
+.mycelium.cache.*

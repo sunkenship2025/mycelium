@@ -1,0 +1,10 @@
+build
+docs/*
+!docs/index.*
+.mycelium.*
+docs
+vault-generated/
+pods/*
+.history
+.backup
+*.svg

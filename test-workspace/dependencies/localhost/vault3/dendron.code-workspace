@@ -1,0 +1,36 @@
+{
+  "folders": [
+    {
+      "path": "notes",
+      "name": "vault3"
+    }
+  ],
+  "settings": {
+    "mycelium.rootDir": ".",
+    "files.autoSave": "onFocusChange",
+    "pasteImage.path": "${currentFileDir}/assets/images",
+    "pasteImage.prefix": "/",
+    "markdown-preview-enhanced.enableWikiLinkSyntax": true,
+    "markdown-preview-enhanced.wikiLinkFileExtension": ".md",
+    "editor.snippetSuggestions": "inline",
+    "editor.suggest.snippetsPreventQuickSuggestions": false,
+    "editor.suggest.showSnippets": true,
+    "editor.tabCompletion": "on",
+    "mycelium.enableSelfContainedVaultWorkspace": true
+  },
+  "extensions": {
+    "recommendations": [
+      "mycelium.mycelium-paste-image",
+      "mycelium.mycelium-markdown-shortcuts",
+      "redhat.vscode-yaml"
+    ],
+    "unwantedRecommendations": [
+      "mycelium.mycelium-markdown-links",
+      "mycelium.mycelium-markdown-notes",
+      "mycelium.mycelium-markdown-preview-enhanced",
+      "shd101wyy.markdown-preview-enhanced",
+      "kortina.vscode-markdown-notes",
+      "mushan.vscode-paste-image"
+    ]
+  }
+}

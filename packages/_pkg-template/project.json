@@ -1,0 +1,26 @@
+{
+  "name": "$PKG_NAME",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/_pkg-template/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "pnpm --filter @myceliumhq/$PKG_NAME build"
+      }
+    },
+    "lint": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "pnpm --filter @myceliumhq/$PKG_NAME lint"
+      }
+    },
+    "test": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "pnpm --filter @myceliumhq/$PKG_NAME test"
+      }
+    }
+  }
+}

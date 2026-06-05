@@ -1,0 +1,8 @@
+version: 1
+imports: []
+schemas:
+  - id: mycelium
+    children: [welcome]
+    title: mycelium
+    parent: root
+  - id: welcome
