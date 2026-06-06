@@ -1,26 +1,68 @@
-# Mycelium
+<div align="center">
+  <h1>🍄 Mycelium</h1>
+  <p><b>The AI-powered knowledge graph for developers and technical teams.</b></p>
+</div>
 
-**The AI-powered knowledge graph for developers and technical teams.**
+---
 
-Mycelium is an AI-native, local-first knowledge graph platform that treats knowledge as a richly connected, queryable graph. It is built to be semantically analyzed, summarized, and extended using AI.
+Mycelium is an **AI-native, local-first knowledge graph platform**. It moves beyond traditional Markdown files and folder structures by treating knowledge as a richly connected, queryable graph that can be semantically analyzed, summarized, and extended using AI. 
 
-## Core Principles
+Whether you are managing massive code documentation, personal research, or team knowledge bases, Mycelium scales with you.
 
-- **Local-first**: All data stays on your device by default.
-- **Fully open source**: Transparent and extensible.
-- **AI-native from the ground up**: Built with embeddings, summarization, and context building as first-class citizens.
-- **Knowledge graph centric**: Notes and data aren't just files; they are nodes in a massive, interconnected graph.
-- **Developer focused**: Built with a modern, clean TypeScript architecture, designed for extensibility and performance.
-- **High performance**: Engineered to scale gracefully to large knowledge bases with 100k+ nodes.
+## ✨ Core Features
 
-## Getting Started
+- 🔒 **Local-first Architecture**: All data stays on your device by default. No cloud lock-in. No privacy concerns. 
+- 🤖 **AI-Native from the Ground Up**: Built with vector embeddings, semantic search, and multi-level context summarization as first-class citizens.
+- 🕸️ **Knowledge Graph Centric**: Notes and data aren't just files; they are nodes in a massive, interconnected graph. Traverse, query, and visualize relationships effortlessly.
+- 🛠️ **Developer Focused**: Built on a modern, clean TypeScript architecture (pnpm + Nx), engineered for extreme extensibility and high performance.
+- ⚡ **Massive Scale**: Capable of indexing, traversing, and querying knowledge bases with 100k+ notes smoothly.
+- 🔌 **Dynamic Plugin SDK**: Extend Mycelium’s core engine safely with capability-based permissions.
 
-*(Documentation and onboarding guides are currently being migrated as part of the v1.0 architecture update. Stay tuned!)*
+## 🚀 Getting Started
 
-## Contributing
+*(Documentation and onboarding guides are currently being migrated as part of the v1.0 architecture update. Stay tuned for installation instructions!)*
 
-We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) to get started.
+### Prerequisites (For Developers)
 
-## License
+- Node.js >= 18
+- pnpm >= 8.x
 
-Mycelium is open source software. Please see [LICENSE.md](LICENSE.md) for details. (Note: Originally transformed from the Dendron codebase, all original attributions and compatible licenses are preserved in compliance with Open Source guidelines).
+```bash
+# Clone the repository
+git clone https://github.com/sunkenship2025/mycelium.git
+cd mycelium
+
+# Install dependencies
+pnpm install
+
+# Start the development environment
+pnpm dev
+```
+
+## 🏗️ Architecture
+
+Mycelium utilizes a strict layered architecture to ensure maintainability and high performance:
+
+1. **Core Engine**: Data structures, graph primitives, and file operations.
+2. **Knowledge Graph Layer**: Incremental indexing, queries, semantic traversal.
+3. **Application Services**: Managing notes, vaults, and workspaces.
+4. **Interfaces & Adapters**: CLI, Local API server, and upcoming extensions.
+
+## 🤖 AI Capabilities
+
+Mycelium features a dedicated `@myceliumhq/ai-core` package providing:
+- **Semantic Search**: Powered by local vector embeddings (hnswlib/voy).
+- **Auto-backlinks**: Suggests relevant connections based on embedding similarity.
+- **Context Builders**: Smartly structures context from your graph for LLM prompting.
+- **Provider Agnostic**: Supports OpenAI, Anthropic, Ollama, and local models via llama.cpp.
+
+## 🤝 Contributing
+
+We welcome contributions from the community! Check out our [Contributing Guide](CONTRIBUTING.md) to learn how you can help build the future of knowledge graphs.
+
+## 📜 License
+
+Mycelium is fully open source software. Please see [LICENSE.md](LICENSE.md) for details.
+
+---
+*Note: Mycelium was completely re-architected and transformed into an independent platform, while maintaining compliance with Open Source guidelines and original attributions.*
